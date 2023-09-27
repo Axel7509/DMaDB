@@ -1,0 +1,60 @@
+The "User" stores information about users of the system:
+	1. email (CHAR): email address of the user
+	2. password (CHAR): user's password
+	3. role (Foreign Key): a foreign key that references the user's role
+	4. name (CHAR): user's first name.
+	5. surname (CHAR): user's last name.
+	MtO relation with Review, Role
+	OtM relation with Ticket
+	OtO relation with Medical card
+
+"Role" is used to define the videos to which the user belongs:
+	1. name (CHAR): the name of this particular video (patient, doctor, administrator).
+
+The "Review" is used to store reviews and ratings for a particular fuel pump:
+	1. text (CHAR): text content of the review, allowing users to provide feedback or comments
+	2. author (Foreign Key): a foreign key that references the author of the review
+	2. date (DATETIME): date when this review has been submitted
+	4. rating (INT): a rating that user leaves, 1-5⭐
+
+“Medical Card” is used by patients in clinics to keep all records::
+	1. patient (Foreign Key): A foreign key that references the card owner/OtO relationship with the user. 
+	2. doctor (foreign key): a foreign key that refers to a user with a role/OtO relationship with the user.
+	3. card_id (int): ID number of the patient’s card.
+
+
+The “Disease” section is used to store information about illness and departure.
+	1. name (CHAR): name of a specific disease
+	2. treatment (Foreign key): foreign key referring to the treatment of the disease
+	OtO's Relationship with Treatment
+
+The “Treatment” section is used to store information about the treatment method.
+	1. text (CHAR): treatment descriptions
+	2. medications (Foreign key): foreign key referring to the medications used
+	3. procedures (Foreign key): a foreign key referring to the prescribed procedures
+
+	MtM's Relationship with Medicines
+	MtM's Relationship with Procedures
+
+The “Procedures” section is used to store information about the treatment method.
+	1. text (CHAR): procedure description
+
+The “Medicines” section is used to store information about prescribed medications
+	1. name (CHAR): name of the drug
+
+The “Visit Log” is used to record various activities and patients within the system:
+	1. ticket (foreign key): a foreign key that refers to the type of action being logged.
+	2. patient (foreign key): a foreign key that refers to the user who performed the action being logged.
+	MtO's relationship with Ticket
+	MtO's relationship with	User
+
+“Ticket” is used to register various actions and patients and provide services:
+	1. service (foreign key): a foreign key that refers to an action type that describes the procedure ordered by the user.
+	2. doctor (foreign key): a foreign key that refers to the user performing the service.
+	3. time (datetime): records the date and time of registration of an action or event
+	4. number_id (int): registers the ticket number in the queue
+	OtM's relationship with Services
+
+The “services” section is intended to store information about the services provided.
+	1. name (CHAR): service name
+	2. price (float): price per service

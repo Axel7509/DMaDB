@@ -1,0 +1,17 @@
+1. General information about users:
+	Users can be authorized or unauthorized.
+	Authorized users can be patients, doctors or administrators.
+2. Patient Actions:
+	Order a service voucher
+	Check prices and availability of services
+	Check your medical record
+	Leave feedback about your impressions
+3. Actions of doctors:
+	Accept patients
+	Prescribe procedures and medications
+	Identify and diagnose
+4. Administrator actions:
+	Manage doctors and patients
+	Issuing coupons to visitors
+	View user activity logging
+5. Role system is present (as mentioned above)

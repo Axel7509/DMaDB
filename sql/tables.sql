@@ -155,3 +155,18 @@ CREATE TABLE treatment_procedure (
 );
 
 
+CREATE TABLE IF NOT EXISTS audit(
+    patient varchar(64),
+    doctor varchar(64),
+    serv_name varchar(64),
+    price float,
+    date DATE,
+    time TIME
+);
+
+CREATE TABLE bank(
+    doctor varchar(64),
+    email varchar(64),
+    services_count int DEFAULT 0,
+    total_price float DEFAULT 0,
+);

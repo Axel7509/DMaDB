@@ -13,7 +13,7 @@ CREATE TABLE patient
     CONSTRAINT phone_length CHECK ( char_length(phone) >= 12 )
 );
 
-CREATE TABLE Reviews
+CREATE TABLE reviews
 (
     Id SERIAL PRIMARY KEY,
     patient VARCHAR(64),
@@ -75,7 +75,7 @@ CREATE TABLE service(
     description text,
     price float NOT NULL,
 
-    CONSTRAINT service_name PRIMARY KEY(name),
+    CONSTRAINT service_name PRIMARY KEY(name)
 );
 
 
@@ -93,9 +93,65 @@ CREATE TABLE ticket (
 );
 
 
+CREATE TABLE treatment(
+    treatment_id SERIAL,
+    description text,
+
+    CONSTRAINT treatment_id PRIMARY KEY(treatment_id)
+);
+
+
 CREATE TABLE disease(
     name varchar(64) UNIQUE,
     description text,
+    treatment_id int,
 
+    CONSTRAINT fk_treatment_status FOREIGN KEY (treatment_id) REFERENCES treatment(treatment_id),
     CONSTRAINT disease_name PRIMARY KEY(name)
 );
+
+CREATE TABLE disease_med_card (
+    med_card_id INT,
+    name varchar(64),
+    FOREIGN KEY (med_card_id) REFERENCES medical_card(card_id),
+    FOREIGN KEY (name) REFERENCES disease(name),
+    PRIMARY KEY (name, med_card_id)
+);
+
+
+
+CREATE TABLE medicines(
+    name varchar(64) UNIQUE,
+    description text,
+    use_of_medicines text,
+
+    CONSTRAINT medicines_name PRIMARY KEY(name)
+);
+
+
+CREATE TABLE treatment_medicines (
+    treatment_id INT,
+    medicines_name varchar(64),
+    FOREIGN KEY (treatment_id) REFERENCES treatment(treatment_id),
+    FOREIGN KEY (medicines_name) REFERENCES medicines(name),
+    PRIMARY KEY (treatment_id, medicines_name)
+);
+
+
+CREATE TABLE procedure(
+    name varchar(64) UNIQUE,
+    description text,
+
+    CONSTRAINT procedure_name PRIMARY KEY(name)
+);
+
+
+CREATE TABLE treatment_procedure (
+    treatment_id INT,
+    procedure_name varchar(64),
+    FOREIGN KEY (treatment_id) REFERENCES treatment(treatment_id),
+    FOREIGN KEY (procedure_name) REFERENCES procedure(name),
+    PRIMARY KEY (treatment_id, procedure_name)
+);
+
+

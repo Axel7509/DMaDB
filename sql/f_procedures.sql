@@ -16,6 +16,21 @@ AS
     $$
 LANGUAGE plpgsql;
 
+CREATE OR REPLACE PROCEDURE add_review(
+    select_name text,
+    new_text text,
+    new_rating int
+)
+AS
+    $$
+        BEGIN
+            INSERT INTO reviews (patient, text, rating)
+            VALUES (select_name, new_text, new_rating);
+            COMMIT;
+        END;
+    $$
+LANGUAGE plpgsql;
+
 CREATE OR REPLACE PROCEDURE update_med_card(
     select_patient text,
     new_gender text,
